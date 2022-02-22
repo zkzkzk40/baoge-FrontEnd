@@ -1,7 +1,7 @@
 import axios from 'axios'
 //axios.create 创建一个axios实例  我们给这个实例编写配置，后续所有通过实例发送的请求，都受当前配置约束
 const $http = axios.create({
-    // baseURL: 'http://118.31.71.148:8002',
+    baseURL: 'http://8.136.81.47:8081',
     timeout: 3000,
     // headers: {'X-Custom-Header': 'foobar'}
 });

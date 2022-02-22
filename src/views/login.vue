@@ -1,20 +1,30 @@
 <!--  -->
 <template>
-    <h3>饱格后台管理界面</h3>
-    <input type="text" placeholder="请输入用户名" v-model="form.username" />
-    <input type="password" placeholder="请输入密码" v-model="form.password" />
-    <button v-on:click="onSubmit">登录</button>
-<!--    <el-form ref="formRef" :model="form" label-width="120px">-->
-<!--      <el-form-item label="Activity name" label-position="left">-->
-<!--        <el-input v-model="form.name"></el-input>-->
-<!--      </el-form-item>-->
-<!--    </el-form>-->
+  <body id="poster">
+  <el-form class="login-container" label-position="left" v-model="loginForm"
+           label-width="0px">
+    <h3 class="login_title">饱格后台管理系统系统登录</h3>
+    <el-form-item prop="u_id">
+      <el-input type="text" v-model="loginForm.u_id"
+                auto-complete="off" placeholder="账号"></el-input>
+    </el-form-item>
+    <el-form-item prop="u_password">
+      <el-input type="password" v-model="loginForm.u_password"
+                auto-complete="off" placeholder="密码"></el-input>
+    </el-form-item>
+    <el-form-item style="width: 100%">
+      <el-button type="primary" style="width: 100%;background: #505458;border: none"
+                 v-on:click="login">登录</el-button>
+    </el-form-item>
+  </el-form>
+  </body>
 </template>
 
 <script>
 // 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 // 例如：import 《组件名称》 from ‘《组件路径》‘;
-// import {useRouter} from 'vue-router'
+// eslint-disable-next-line no-unused-vars
+import {login} from "@/request/api";
 export default {
   name: "login",
   // import引入的组件需要注入到对象中才能使用
@@ -22,10 +32,10 @@ export default {
   data() {
     // 这里存放数据
     return {
-      form: {
-        username: '',
-        password: ''
-      }
+      loginForm: {
+        u_id: '',
+        u_password: ''
+      },
     }
   },
   // 监听属性 类似于data概念
@@ -34,10 +44,15 @@ export default {
   watch: {},
   // 方法集合
   methods: {
-    onSubmit :function () {
-      // let router = useRouter();
-      // router.push('/manage')
+    login(){
       this.$router.push('/manage')
+      // login(this.loginForm.u_id,this.loginForm.u_password)
+      //   .then((data)=>{
+      //     console.log('登录成功',data)
+      //   })
+      //   .catch((data)=>{
+      //     console.log('登录失败',data)
+      //   })
     }
   },
   // 生命周期 - 创建完成（可以访问当前this实例）
@@ -65,52 +80,33 @@ export default {
 }
 </script>
 <style scoped>
-.login-wrap {
-  text-align: center;
+/*@import "~@/assets/css/style.css";*/
+#poster {
+  background: url("~@/assets/img/background.jpg") no-repeat center;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  position: fixed;
 }
-h3 {
-  text-align: center;
+body{
+  margin: 0px;
 }
-span {
-  text-align: center;
-}
-input {
-  display: block;
-  width: 250px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  outline: none;
-  border: 1px solid #888;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-p {
-  color: red;
-  text-align: center;
+.login-container {
+  border-radius: 15px;
+  background-clip: padding-box;
+  margin: 230px auto 90px;
+  width: 350px;
+  padding: 35px 35px 15px 35px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 0 25px #cac6c6;
 }
 
-button {
-  display: block;
-  width: 250px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 auto;
-  border: none;
-  background-color: #41b883;
-  color: #fff;
-  font-size: 16px;
-  margin-bottom: 5px;
+.login_title {
+  margin: 0px auto 40px auto;
+  text-align: center;
+  color: #505458;
 }
 
-span {
-  cursor: pointer;
-}
-
-span:hover {
-  color: #41b883;
-}
 </style>
 
