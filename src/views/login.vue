@@ -25,6 +25,8 @@
 // 例如：import 《组件名称》 from ‘《组件路径》‘;
 // eslint-disable-next-line no-unused-vars
 import {login} from "@/request/api";
+import {saveToken} from "@/util/tokenUtil";
+import {ElMessage} from "element-plus";
 export default {
   name: "login",
   // import引入的组件需要注入到对象中才能使用
@@ -45,15 +47,20 @@ export default {
   // 方法集合
   methods: {
     login(){
-      this.$router.push('/manage')
-      // login(this.loginForm.u_id,this.loginForm.u_password)
-      //   .then((data)=>{
-      //     console.log('登录成功',data)
-      //   })
-      //   .catch((data)=>{
-      //     console.log('登录失败',data)
-      //   })
-    }
+      // this.$router.push('/manage')
+      login(this.loginForm.u_id,this.loginForm.u_password)
+        .then((data)=>{
+          saveToken(data.data.token)
+          localStorage.setItem('userId',data.data.userId)
+          localStorage.setItem('username',this.loginForm.u_id)
+          this.$router.push('/manage')
+        })
+        .catch((data)=>{
+          ElMessage.error('登录失败,请检查账号或密码是否正确')
+          console.log('登录失败',data)
+        })
+    },
+
   },
   // 生命周期 - 创建完成（可以访问当前this实例）
   created() {

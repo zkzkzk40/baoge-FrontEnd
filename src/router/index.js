@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+// eslint-disable-next-line no-unused-vars
 import login from "@/views/login";
 const routes = [
   {
     path: '/',
     name: 'login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/manager.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/login.vue')
   },
   {
     path: '/manage',
